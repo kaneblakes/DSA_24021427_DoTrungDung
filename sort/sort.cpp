@@ -8,9 +8,67 @@ class Sort {
         int size = arr.size();
     
     public:
-        void MergeSort (){
-            if (size > 1){
-                
+
+        int median (vector<int>& arr){
+            sort(arr.begin(), arr.end());
+            return arr[(arr.size() - 1)/2];
+        }
+
+        void swap (int a, int b) {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
+
+        int partition(vector<int>& arr, int high, int low) {
+            int pivot = arr[high];
+            int i = low - 1;
+            for (int j = low; j < high; j++) {
+                if (arr[j] <= pivot) {
+                    i++;
+                    swap(arr[i], arr[j]);
+                }
             }
+            swap(arr[i+1], arr[high]);
+            return i+1; 
+        }
+
+        void quickSort(vector<int>& arr, int low, int high) {
+            if (low < high) {
+                int pi = partition(arr, low, high);
+
+                quickSort(arr, low, pi - 1);
+                quickSort(arr, pi + 1, high);
+            }
+        }
+
+        void merge(vector<int>& arr, int l, int m, int r) {
+            int n1 = m - l + 1; 
+            int n2 = r - m;
+            vector<int> left(n1);
+            vector<int> right(n2);
+            for (int i = 0; i < n1; i++)
+                left[i] = arr[l + i];
+            for (int j = 0; j < n2; j++) 
+                right[j] = arr[m + 1 + j];
+
+            int i = 0, j = 0, k = l;
+
+            while (i < n1 && j < n2) {
+                if (left[i] <= right[j])
+                    arr[k++] = left[i++];
+                else
+                    arr[k++] = right[j++];
+            }
+        }
+
+        void mergeSort(vector<int>& arr, int l, int r) {
+            if (l >= r)
+                return;
+            
+            int m = l + (r - l) / 2;
+            mergeSort(arr, l, m);
+            mergeSort(arr, m + 1, r);
+            merge(arr, l, m, r);
         }
 };
