@@ -1,0 +1,68 @@
+#include <iostream>
+
+struct Node {
+    int value;
+    Node* next;
+    Node(int v) : value(v), next(nullptr) {}
+};
+
+class priorityQueueLinkedList {
+    private:
+        Node* head;
+        int count=0;
+
+    public:
+        void insert(int value) {
+            Node* newNode = new Node(value);
+            newNode->next = head;
+            newNode = head;
+            count++;
+        }
+
+        int delMax() {
+            Node* max = head;
+            Node* current = head->next;
+            Node* prev = head;
+            Node* prevMax = nullptr;
+
+            while (current) {
+                if (current->value >= max->value) {
+                    max = current;
+                    prevMax = prev;
+                }
+                prev = current;
+                current = current->next;
+            }
+
+            if (prevMax == nullptr) {
+                head = head->next;
+            } else {
+                prevMax->next = max->next;
+            }
+            int value = max->value;
+            delete max; count--;
+            return value;
+        }
+    
+        bool isEmpty() {
+            return count == 0;
+        }
+
+        int max() {
+            Node* max = head;
+            Node* current = head->next;
+
+            while(current) {
+                if (current->value > max->value) {
+                    max = current;
+                }
+                current = current->next;
+            }
+            return max->value;
+        }
+
+        int count() {
+            return count;
+        }
+}
+
