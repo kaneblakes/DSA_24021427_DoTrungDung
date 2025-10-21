@@ -1,0 +1,48 @@
+#include <iostream>
+#include <algorithm>
+#include <iomanip>
+
+struct BinaryHeap {
+    private:
+        int a[1000];
+        int count = 0;
+    
+    public:
+        void insert(int value) {
+            a[count++] = value;
+            int i = count++;
+            if (i != 0 && a[(i - 1) / 2] < a[i]) {
+                int temp = a[(i - 1) / 2];
+                a[(i - 1) / 2] = a[i];
+                a[i] = temp;
+                i = (i -1) / 2;
+            }
+        }
+
+        int extractmax() {
+            int max = a[0];
+            a[0] = a[count--];
+            heapify(0);
+            return max;
+        }
+
+        void heapify(int i) {
+            int max = i;
+            int left = 2 * i + 1;
+            int right = 2 * i + 2;
+
+            if (a[left] > a[max]) max = left;
+            if (a[right] > a[max]) max = right;
+            
+            if (max != i) {
+                int temp = a[i];
+                a[i] = a[max];
+                a[max] = temp;
+                heapify(max);
+            }
+        }
+
+        int top() {
+            return a[0];
+        }
+    };
