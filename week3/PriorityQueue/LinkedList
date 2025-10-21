@@ -64,5 +64,5 @@ class priorityQueueLinkedList {
         int count() {
             return count;
         }
-}
+};
 
