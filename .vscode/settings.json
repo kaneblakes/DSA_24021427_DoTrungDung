@@ -59,5 +59,6 @@
   "files.associations": {
     "vector": "cpp",
     "binaryheap": "cpp"
-  }
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }
