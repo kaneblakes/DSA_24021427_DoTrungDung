@@ -58,7 +58,8 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
     "vector": "cpp",
-    "binaryheap": "cpp"
+    "binaryheap": "cpp",
+    "hashtablelinearprobing": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }
