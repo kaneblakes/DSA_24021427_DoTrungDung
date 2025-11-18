@@ -32,11 +32,12 @@ class HashTable {
             int index = hash(key);
             for (int i = 0; i < size; i++) {
                 int p = (index + i) % size;
-                if (Table[p].isEmpty || Table[p].key == key) {
-                    Table[p].key == key;
-                    Table[p].value == value;
-                    Table[p].isEmpty == false;
-                    Table[p].isDeleted == false;
+                if (Table[p].isEmpty || Table[p].isDeleted || Table[p].key == key) {
+                    Table[p].key = key;
+                    Table[p].value = value;
+                    Table[p].isEmpty = false;
+                    Table[p].isDeleted = false;
+                    return;
                 }
             }
         }
@@ -48,6 +49,7 @@ class HashTable {
                 if (!Table[p].isEmpty || !Table[p].isDeleted || Table[p].key == key) {
                     Table[p].isDeleted = true;
                 }
+                return;
             }
         }
 

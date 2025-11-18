@@ -23,7 +23,7 @@ class HashTable {
         }
 
         int insert (string key, int value) {
-            Node* insert = new Node (key, value, nulltr);
+            Node* insert = new Node (key, value, nullptr);
             insert->next = table[hash(key)];
             table[hash(key)] = insert;
         }
